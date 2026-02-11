@@ -1,0 +1,119 @@
+# =============================================================================
+# Configuration Template
+# =============================================================================
+# Copy this file to conf/config.yml and fill in your values.
+# Do NOT commit config.yml to version control.
+# =============================================================================
+
+version: 0.0.10
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+logger:
+  config: conf/logger.ini
+  base_path: logs
+
+# ---------------------------------------------------------------------------
+# FastAPI Server
+# ---------------------------------------------------------------------------
+fastapi:
+  listen_port: 8000
+  cors:
+    - "http://localhost"
+    - "http://localhost:3000"
+    - "http://localhost:8080"
+
+# ---------------------------------------------------------------------------
+# Database (PostgreSQL + pgvector)
+# ---------------------------------------------------------------------------
+# Used for storing vector embeddings and application state.
+# Requires PostgreSQL with the pgvector extension.
+db:
+  dialect: postgresql
+  # Must use psycopg3 for langchain_postgres compatibility
+  sync_driver: psycopg
+  async_driver: asyncpg
+  host: localhost
+  port: 5432
+  db: knowledge_agents
+  user: your_db_user
+  password: "your_db_password"
+  debug: false
+
+# ---------------------------------------------------------------------------
+# Embeddings Service
+# ---------------------------------------------------------------------------
+# OpenAI-compatible embeddings endpoint. Can be a local vLLM/TGI server
+# or any provider that implements the OpenAI embeddings API.
+embeddings:
+  base_url: http://localhost:8001/v1
+  api_key: dummy
+  model: BAAI/bge-m3
+
+# ---------------------------------------------------------------------------
+# Confluence Integration
+# ---------------------------------------------------------------------------
+# Connects to Confluence (Data Center or Server) to ingest documentation.
+# Requires a Personal Access Token (PAT) with read permissions.
+confluence:
+  version: v2
+  url: https://confluence.example.com
+  email: your_email@example.com
+  api_token: <your_confluence_api_token>
+  rag:
+    - space: YOUR_SPACE_KEY
+      vectorstore_collection_name: confluence_docs_tech_spec
+      ingest:
+        enabled: true
+        limit: 250
+        # Cron expression: <minutes> <hour> <day-of-month> <month> <day-of-week>
+        cron_expression: "0 * * * 1-5"
+
+# ---------------------------------------------------------------------------
+# Jira Integration
+# ---------------------------------------------------------------------------
+# Connects to Jira (Data Center or Server) for ticket retrieval and updates.
+# Requires a Personal Access Token (PAT) with read/write permissions.
+jira:
+  url: https://jira.example.com
+  api_token: <your_jira_api_token>
+  cron:
+    components:
+      # List your Jira project component names here.
+      # These are used for scheduled progress ingestion.
+      - Component A
+      - Component B
+      - Component C
+    cron_expression: "0 * * * *"
+  model_providers:
+    vlm:
+      model: openbmb/MiniCPM-o-2_6
+
+# ---------------------------------------------------------------------------
+# SharePoint Integration (Optional)
+# ---------------------------------------------------------------------------
+# Connects to SharePoint Online to ingest documents (e.g., functional specs).
+# Requires Azure AD app registration. See docs/SHAREPOINT.md for setup.
+sharepoint:
+  url: https://yourcompany.sharepoint.com/sites/YourSite
+  client_id: <your_azure_client_id>
+  client_secret: <your_azure_client_secret>
+  email: your_email@example.com
+  vectorstore_collection_name: sharepoint_docs_func_spec
+  credential_method: user
+  ingest:
+    - relative_url: /sites/YourSite/Shared Documents/Your/Document/Path
+      recursive: true
+      include_regex:
+        - (.*)\.docx$
+      exclude_regex:
+        - (.*)Archive(.*)
+      vectorstore_collection_name: sharepoint_docs_func_spec
+
+# ---------------------------------------------------------------------------
+# Scheduler
+# ---------------------------------------------------------------------------
+# Enable to run periodic ingestion jobs (Confluence, Jira progress, etc.)
+scheduler:
+  enabled: false

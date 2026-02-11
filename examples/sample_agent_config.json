@@ -1,0 +1,11 @@
+{
+  "info": {
+    "id": "jira_agent",
+    "name": "Jira Agent",
+    "description": "An AI agent for querying and managing Jira tickets via the OpenAI-compatible API.",
+    "api": {
+      "type": "openai",
+      "url": "http://localhost:8000/openai"
+    }
+  }
+}

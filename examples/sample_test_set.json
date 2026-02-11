@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "total_queries": 5,
+    "generation_timestamp": "2025-01-01T00:00:00.000000",
+    "query_types": {
+      "specific": 3,
+      "general": 2
+    },
+    "file_format_version": "1.0"
+  },
+  "summary": {
+    "total_queries": 5,
+    "specific_queries": 3,
+    "general_queries": 2,
+    "other_queries": 0
+  },
+  "queries": [
+    {
+      "query": "What are the steps to onboard a new participant?",
+      "type": "general",
+      "ground_truth": "Onboarding a new participant involves: 1) Registration and KYC verification, 2) Account provisioning and credential setup, 3) Connectivity testing, 4) Configuration of user roles and permissions, 5) Production go-live approval."
+    },
+    {
+      "query": "What is the maximum password length allowed by the system?",
+      "type": "specific",
+      "ground_truth": "The system allows a maximum password length of 128 characters, with a minimum of 12 characters. Passwords must contain at least one uppercase letter, one lowercase letter, one digit, and one special character."
+    },
+    {
+      "query": "How does the system handle session timeouts?",
+      "type": "general",
+      "ground_truth": "User sessions are automatically terminated after 30 minutes of inactivity. A warning notification is displayed 5 minutes before timeout. Users can extend the session by performing any action. Expired sessions require re-authentication."
+    },
+    {
+      "query": "What is the API rate limit for the REST endpoints?",
+      "type": "specific",
+      "ground_truth": "The REST API enforces a rate limit of 100 requests per minute per API key. Exceeding this limit returns HTTP 429 (Too Many Requests). Rate limit headers (X-RateLimit-Remaining, X-RateLimit-Reset) are included in all responses."
+    },
+    {
+      "query": "What is the data retention policy for audit logs?",
+      "type": "specific",
+      "ground_truth": "Audit logs are retained for 7 years in compliance with regulatory requirements. Logs older than 90 days are archived to cold storage. Real-time access is available for logs within the last 90 days."
+    }
+  ]
+}

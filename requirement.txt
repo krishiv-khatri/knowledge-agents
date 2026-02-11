@@ -1,0 +1,89 @@
+# =============================================================================
+# Python Dependencies
+# =============================================================================
+# Install with: pip install -r requirement.txt
+# For exact version pinning, use uv (see pyproject.toml).
+# =============================================================================
+
+pytz
+
+# FastAPI (HTTP server)
+fastapi
+uvicorn[standard]
+uvloop
+
+# Authentication (JWT)
+python-jose[cryptography]
+PyJWT
+
+# YAML parsing
+ruamel.yaml==0.17.32
+
+# Async HTTP and scheduling
+aiohttp
+aiodns
+apscheduler
+async-timeout
+async-lru
+
+# ORM and database
+pydantic
+SQLAlchemy==2.0.4
+sqlalchemy-json
+sqlalchemy[asyncio]
+asyncpg
+psycopg
+psycopg-binary
+greenlet
+
+# OpenAI SDK
+openai
+jinja2
+
+# Testing
+pytest-asyncio
+pytest-datafiles
+pytest-html
+
+# CLI and env
+typer
+python-dotenv
+
+# LangChain ecosystem (RAG, agents, vector store)
+langchain
+langchain-core
+langchain-openai
+langchain-postgres
+langchain-huggingface
+langchain-text-splitters
+langchain-experimental
+langgraph
+langgraph-supervisor
+
+# RAG evaluation
+ragas
+datasets
+transformers
+torch
+
+# Document processing
+pydantic_yaml
+html2text
+markitdown[docx]
+python-docx
+Pillow
+
+# SharePoint integration
+office365-rest-python-client
+
+# Markdown / table formatting
+py-markdown-table
+pytablewriter
+dateparser
+
+# Async database (direct)
+asyncmy
+pymysql
+
+# Misc
+asgi-lifespan
